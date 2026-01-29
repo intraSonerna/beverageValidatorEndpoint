@@ -9,7 +9,7 @@ from PIL import Image
 
 app = FastAPI(title="Beverage Detector")
 
-MODEL_PATH = "/models/best.engine"  # eller best.pt
+MODEL_PATH = "/models/best50.engine"  # eller best.pt
 model = YOLO(MODEL_PATH)
 
 def img_to_base64(img_bgr):
