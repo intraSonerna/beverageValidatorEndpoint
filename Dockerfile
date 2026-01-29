@@ -2,13 +2,17 @@ FROM nvidia/cuda:12.4.1-cudnn-runtime-ubuntu22.04
 
 WORKDIR /app
 
-RUN apt update && apt install -y python3 python3-pip
+RUN apt update && apt install -y python3 python3-pip wget
 
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
+# Ladda ner engine-filen från din server
+RUN mkdir -p /models && \
+    wget https://intra.sonerna.se/wp-content/uploads/beverageValidator/models/best50.engine \
+    -O /models/best50.engine
+
 COPY app.py .
-COPY models /models
 
 EXPOSE 8000
 
